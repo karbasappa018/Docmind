@@ -1,0 +1,87 @@
+# Database configurations
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/docmind
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  ai:
+    google:
+      genai:
+        api-key: ${GOOGLE_API_KEY}
+
+        chat:
+          options:
+            model: gemini-3.6-flash
+            temperature: 0.2
+
+        embedding:
+          api-key: ${GOOGLE_API_KEY}
+          text:
+            model: gemini-embedding-001
+            task-type: RETRIEVAL_DOCUMENT
+            dimensions: 768
+            auto-truncate: true
+
+    # PostgreSQL + pgvector configurations
+    vectorstore:
+      pgvector:
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
+        dimensions: 768
+        table-name: vector_store
+        schema-name: public
+        initialize-schema: true
+
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 50MB
+
+
+# Application configurations
+
+app:
+  rag:
+    chunk-size: 700
+    # chunk-overlap: 100
+    top-k: 5
+    similarity-threshold: 0.0
+
+  cors:
+    allowed-origins: "*"
+    allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+    allowed-headers: "*"
+
+
+# JWT configurations
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 3600000
+
+
+# BootUI configurations
+
+bootui:
+  enabled: ON
+
+
+# Logging configurations
+
+logging:
+  level:
+    org:
+      springframework:
+        ai:
+          chat:
+            client:
+              advisor: DEBUG
