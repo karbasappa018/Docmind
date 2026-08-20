@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #6366f1;
+  --color-primary-dark: #4f46e5;
+  --color-primary-light: #818cf8;
+  --color-surface: #0f172a;
+  --color-surface-2: #111827;
+  --color-surface-3: #1e293b;
+  --color-border: #1e293b;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-accent: #06b6d4;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background-color: #0f172a;
+  color: #f1f5f9;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbars ─── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ─── Animations ─── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in      { animation: fadeIn 0.25s ease-out forwards; }
+.animate-slide-right  { animation: slideInRight 0.25s ease-out forwards; }
+.animate-slide-left   { animation: slideInLeft 0.25s ease-out forwards; }
+.animate-scale-in     { animation: scaleIn 0.2s ease-out forwards; }
+
+/* ─── Typing dots ─── */
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background: #6366f1;
+  border-radius: 50%;
+  display: inline-block;
+  animation: bounce 1.4s infinite ease-in-out;
+}
+.typing-dot:nth-child(1) { animation-delay: 0s; }
+.typing-dot:nth-child(2) { animation-delay: 0.18s; }
+.typing-dot:nth-child(3) { animation-delay: 0.36s; }
+
+@keyframes bounce {
+  0%, 60%, 100% { transform: translateY(0);    opacity: 0.35; }
+  30%            { transform: translateY(-6px); opacity: 1; }
+}
+
+/* ─── Blinking cursor for streaming ─── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.cursor-blink {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: #6366f1;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  border-radius: 1px;
+  animation: blink 0.9s step-end infinite;
+}
+
+/* ─── Shimmer skeleton ─── */
+.shimmer {
+  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ─── Glass card ─── */
+.glass {
+  background: rgba(30, 41, 59, 0.55);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+/* ─── Prose (markdown in chat) ─── */
+.prose { max-width: none; }
+.prose p  { margin-bottom: 0.6rem; line-height: 1.65; }
+.prose h1 { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin: 0.75rem 0 0.35rem; }
+.prose h2 { font-size: 1.05rem; font-weight: 600; color: #f1f5f9; margin: 0.65rem 0 0.3rem; }
+.prose h3 { font-size: 0.95rem; font-weight: 600; color: #e2e8f0; margin: 0.55rem 0 0.25rem; }
+.prose ul  { list-style-type: disc;    padding-left: 1.35rem; margin-bottom: 0.6rem; }
+.prose ol  { list-style-type: decimal; padding-left: 1.35rem; margin-bottom: 0.6rem; }
+.prose li  { margin-bottom: 0.2rem; }
+.prose strong { color: #f1f5f9; font-weight: 600; }
+.prose em     { color: #cbd5e1; }
+.prose code {
+  background: #0f172a;
+  color: #a78bfa;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.3rem;
+  font-size: 0.83em;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  border: 1px solid #1e293b;
+}
+.prose pre {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 0.6rem;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  margin: 0.65rem 0;
+}
+.prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #e2e8f0;
+}
+.prose blockquote {
+  border-left: 3px solid #6366f1;
+  padding-left: 0.8rem;
+  color: #94a3b8;
+  margin: 0.6rem 0;
+  font-style: italic;
+}
+.prose hr { border-color: #334155; margin: 0.75rem 0; }
+.prose a  { color: #818cf8; text-decoration: underline; text-underline-offset: 2px; }
+
+/* ─── Range input track ─── */
+input[type=range] { cursor: pointer; }
+input[type=range]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: #334155;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #6366f1;
+  margin-top: -5px;
+  box-shadow: 0 0 0 2px #0f172a, 0 0 0 3px #6366f1;
+  transition: box-shadow 0.15s;
+}
+input[type=range]:hover::-webkit-slider-thumb {
+  box-shadow: 0 0 0 2px #0f172a, 0 0 0 4px #6366f1;
+}
+
+/* ─── Prism Syntax Highlighting ─── */
+.token.comment, .token.prolog, .token.doctype, .token.cdata { color: #64748b; font-style: italic; }
+.token.punctuation { color: #94a3b8; }
+.token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted { color: #f43f5e; }
+.token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: #34d399; }
+.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { color: #38bdf8; }
+.token.atrule, .token.attr-value, .token.keyword { color: #818cf8; font-weight: 500; }
+.token.function, .token.class-name { color: #f59e0b; }
+.token.regex, .token.important, .token.variable { color: #fb923c; }
+.token.important, .token.bold { font-weight: bold; }
+.token.italic { font-style: italic; }
